@@ -39,7 +39,7 @@ else
     end
 end
 A = b*x + n*sum(As);  % area omogeneizzata
-S = b*x^2/2 + n*sum(As.*(x-d)); % momento statico omogeneizzato rispetto all'asse neutro
+S = b*x^2/2 + n*sum(As.*d); % momento statico omogeneizzato rispetto al lembo compresso (i.e. y = 0)
 J = b*x^3/3 + n*sum(As.*(d-x).^2);  % momento di inerzia omogeneizzato rispetto all'asse neutro
 end
 
