@@ -1,6 +1,7 @@
 function [ tab ] = derivaCaratteristicheAcciaio()
-%DERIVACARATTERISTICHE Summary of this function goes here
-%   Detailed explanation goes here
+%DERIVACARATTERISTICHE derive fundamental values for rebar steel 
+%   the funtcion caluclate each of the fundamental properties of rebar
+%   steel B450C. Output is a table with each of these values.
 tab = table;
 
 tab.fyk = 450;

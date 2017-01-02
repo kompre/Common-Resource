@@ -1,6 +1,8 @@
-function [ tab ] = derivaCaratteristiche( f_ck, R_ck )
-%DERIVACARATTERISTICHE Summary of this function goes here
-%   Detailed explanation goes here
+function [ tab ] = derivaCaratteristicheCA( f_ck, R_ck )
+%DERIVACARATTERISTICHE derive charateristic value from fck, Rck
+%   the function calculate every fundamental values from the fck
+%   value (Rck is given for naming purpose only) according to EC2. the
+%   output is a table containg each of this values
 
 ni = .2; % coefficiente di Poisson
 gamma_cls = 1.5;
