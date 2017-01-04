@@ -16,6 +16,9 @@ function [ sezione, rett ] = rettangolo( B, H, x0, y0, nX, nY )
 %   nY: numero di rettangoli infinitesimi in cui discretizzare il rettangolo elementare
 
 numRett = length(B);    % numero di rettangoli elementari
+rett.B = [0, 0];
+rett.H = [0, 0];
+rett = repmat(rett, numRett, 1);
 for i = 1:numRett
     rett(i).B = [ (x0(i) - B(i)/2), (x0(i) + B(i)/2)];  % estremi del rettangolo
     rett(i).H = [ (y0(i) - H(i)/2), (y0(i) + H(i)/2)];  
