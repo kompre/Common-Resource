@@ -13,8 +13,8 @@ errore = 10^-(precisione);
 err = 1;  % inizializzazione variabile di controllo
 while err >= errore
     var = (varB + varA)/2; % valore medio tra i due estremi
-    evalin('base', [ varname '=' num2str(var,precisione) ';']);
-    ris = evalin('base', fx);   % il risultato principale della funzione è salvato localmente
+    evalin('caller', [ varname '=' num2str(var,precisione) ';']);
+    ris = evalin('caller', fx);   % il risultato principale della funzione è salvato localmente
     fm = ris - f0;
     if fm < 0
         varA = var;
@@ -24,7 +24,7 @@ while err >= errore
     err = (varB - varA)/2;
 end
 
-evalin('base', [ output ' = ' fx]); % scrive i risultati della funzione fx nel ws base
+evalin('caller', [ output ' = ' fx]); % scrive i risultati della funzione fx nel ws della funzione chiamante
 
 
 end

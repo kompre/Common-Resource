@@ -27,33 +27,38 @@ E_cm = 22*(f_cm/10)^.3 * 1E3;
 G = E_cm/(2*(1+ni));
 
 if f_ck <= 50
-    varepsilon_cu = 3.5;
+    ecu = 3.5;
 else
-    varepsilon_cu = 2.6 + 35*((90-f_ck)/100)^4;
+    ecu = 2.6 + 35*((90-f_ck)/100)^4;
 end
 
 if f_ck <= 50
-    varepsilon_c2 = 2;
+    ec2 = 2;
 else
-    varepsilon_c2 = 2 + .085*(f_ck-50)^.53;
+    ec2 = 2 + .085*(f_ck-50)^.53;
 end
 
 if f_ck <= 50
-    varepsilon_c3 = 1.75;
+    ec3 = 1.75;
 else
-    varepsilon_c3 = 1.75 + .55*(f_ck-50)/40;
+    ec3 = 1.75 + .55*(f_ck-50)/40;
 end
 
 
 if f_ck <= 50
-    varepsilon_c4 = .7;
+    ec4 = .7;
 else
-    varepsilon_c4 = .2*varepsilon_cu;
+    ec4 = .2*ecu;
 end
 
 f_bk = 2.25 * f_ctk05;
 
-tab = table(f_ck,R_ck,gamma_cls,alpha_cc,f_cd,f_cm,f_ctm,f_ctk05,f_ctk95,f_bk,E_cm,ni,G,varepsilon_cu,varepsilon_c2,varepsilon_c3,varepsilon_c4);
+ecu = ecu*1e-3;
+ec2 = ec2*1e-3;
+ec3 = ec3*1e-3;
+ec4 = ec4*1e-3;
+
+tab = table(f_ck,R_ck,gamma_cls,alpha_cc,f_cd,f_cm,f_ctm,f_ctk05,f_ctk95,f_bk,E_cm,ni,G,ecu,ec2,ec3,ec4);
 
 end
 
