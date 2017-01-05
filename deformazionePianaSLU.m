@@ -1,4 +1,4 @@
-function [ e1, e2 ] = deformazionePianaSLU( x, h, d, ecu, ec2, esu )
+function [ e1, e2, varargout ] = deformazionePianaSLU( x, H, d, ecu, ec2, esu )
 %DEFORMAZIONEPIANA calcolo della deformazioni agli estremi della sezione 
 %   calcolo dei valori di deformazione ai lembi estremi della sezione di
 %   altezza L, dato la distanza x dell'asse neutro da un lembo della
@@ -7,7 +7,7 @@ function [ e1, e2 ] = deformazionePianaSLU( x, h, d, ecu, ec2, esu )
 %   Varibiali di input:
 %       ecu:    deformazione ultima del cls
 %       ec2:    deformazione cls per sezione interamente reagente      
-%       esu:    deformazione ultima dell'acciaio [DEVE ESSERE NEGATIVO]
+%       esu:    deformazione ultima dell'acciaio
 %       x:  distanza dell'asse neutro dall'origine
 %       h:  altezza totale della sezione
 %       d:  distanza dell'armatura dal'origine
@@ -16,6 +16,8 @@ function [ e1, e2 ] = deformazionePianaSLU( x, h, d, ecu, ec2, esu )
 %       e1: deformazione della sezione al lembo coincidente con l'origine
 %       e2: deformazione della sezione al lembo estremo della sezione
 
+h = max(H);
+esu = -abs(esu);    % rende esu negativo
 
 limite_campo2_campo3 = ecu/(ecu - esu)*d;
 limite_campo5_campo6 = h;
@@ -41,15 +43,21 @@ else
     e2 = (x-h)/(x-x_c)*ec2;
 end
 
-ev = zeros(size(h));
-ev(1) = e1;
-if e1 ~= e2
-    de = (e2-e1)/(length(h)-1); % incremento infinitesimale della deformazione
-    for i = 2:length(h)
-        ev(i) = ev(i-1) + de;
+% nel caso h sia un vettore di punti
+if length(H) > 1
+    ev = zeros(size(H));
+    ev(1) = e1;
+    if e1 ~= e2
+        de = (e2-e1)/(length(H)-1); % incremento infinitesimale della deformazione
+        for i = 2:length(H)
+            ev(i) = ev(i-1) + de;
+        end
+    else
+        ev = e1*ones(size(H));  % caso in cui x tende verso l'infinito
     end
-else
-    ev = e1*ones(size(h));  % caso in cui x tende verso l'infinito
+    
+    varargout{1} = ev;
 end
+
 end
 

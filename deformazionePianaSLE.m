@@ -8,7 +8,7 @@ function [ e1, e2 ] = deformazionePianaSLE( x, L, d, ec3, eyd )
 %   Varibiali di input:
 %       ec3:    deformazione limite del cls per essere in condizioni
 %       elastiche
-%       esd:    deformazione elastica dell'acciaio [DEVE ESSERE NEGATIVO]
+%       esd:    deformazione elastica dell'acciaio
 %       x:  distanza dell'asse neutro dall'origine [0,+inf]
 %       L:  altezza totale della sezione
 %       d:  distanza dell'armatura dal'origine
@@ -19,7 +19,9 @@ function [ e1, e2 ] = deformazionePianaSLE( x, L, d, ec3, eyd )
 
 % ipotesi acciao al limite elastico e deformazione cls incognita
 
+eyd = -abs(eyd);    % rende eyd negativo
 limite_campo = d * ec3/(ec3 - eyd); % limite
+
 
 if x == Inf
     e1 = ec3;
