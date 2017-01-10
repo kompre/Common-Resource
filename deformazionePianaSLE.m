@@ -27,11 +27,11 @@ if x == Inf
     e1 = ec3;
     e2 = ec3;
 elseif x <= limite_campo % significa che l'acciaio ha raggiunto il limite elastico e la deformazione del cls è inferiore a quella elastica
-    e1 = x/(d-x)*(-eyd);   % deformazione al lembo compresso, ruotando attorno al punto (esd,d)
-    e2 = (L-x)/(d-x)*eyd;   % deformazione al lembo teso
+    e1 = x/(x-d)*eyd;   % deformazione al lembo compresso, ruotando attorno al punto (esd,d)
+    e2 = (x-L)/(x-d)*eyd;   % deformazione al lembo teso
 elseif x >= limite_campo
     e1 = ec3;   % il cls ha raggiunto il limite elastico e la sezione ruota attorno al punto (ec3,0)
-    e2 = (L-x)/x*ec3;
+    e2 = (x-L)/x*ec3;
 end
     
     

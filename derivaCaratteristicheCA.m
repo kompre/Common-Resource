@@ -1,8 +1,23 @@
-function [ tab ] = derivaCaratteristicheCA( f_ck, R_ck )
+function [ tab ] = derivaCaratteristicheCA( f_ck, varargin )
 %DERIVACARATTERISTICHE derive charateristic value from fck, Rck
 %   the function calculate every fundamental values from the fck
 %   value (Rck is given for naming purpose only) according to EC2. the
 %   output is a table containg each of this values
+
+%% estrazione argomenti opzionali
+
+R_ck = nan;
+
+while ~isempty(varargin)
+    switch varargin{1}
+        case 'R_ck'
+            R_ck = varargin{2};
+        otherwise
+            error(['Unexpected option: ' varargin{1}])
+    end
+    varargin(1:2) = [];
+end
+    
 
 ni = .2; % coefficiente di Poisson
 gamma_cls = 1.5;
